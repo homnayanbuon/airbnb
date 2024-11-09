@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-Airbnb Clone Application
-=======
-Testing github
+# Airbnb Clone Application
 
-> > > > > > > commit_id
+Testing Github to push my mini projects
+
 # airbnb
