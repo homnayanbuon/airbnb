@@ -261,7 +261,7 @@ const RentModal = () => {
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       onClose={rentModal.onClose}
       body={bodyContent}
     />
