@@ -1,18 +1,18 @@
 "use client";
 
 import useCountries from "@/app/hooks/useCountries";
-import { SafeUser } from "@/app/types";
-import { Listing, Reservation } from "@prisma/client";
+import { SafeListing, SafeReservations, SafeUser } from "@/app/types";
+import { Reservation } from "@prisma/client";
 import { format } from "date-fns";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";
-import HeartButton from "../HeartButton";
-import Button from "../Button";
+import HeartButton from "../components/HeartButton";
+import Button from "../components/Button";
 
 interface ListingCardProps {
-  data: Listing;
-  reservation?: Reservation;
+  data: SafeListing;
+  reservation?: SafeReservations;
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
@@ -63,11 +63,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
     const end = new Date(reservation.endDate);
 
     return `${format(start, "PP")} - ${format(end, "PP")}`;
-  }, []);
+  }, [reservation]);
 
   return (
     <div
-      onClick={() => router.push(`listing/${data.id}`)}
+      onClick={() => router.push(`listings/${data.id}`)}
       className="col-span-1 cursor-pointer group"
     >
       <div className="aspect-square w-full relative overflow-hidden rounded-xl">
@@ -86,12 +86,12 @@ const ListingCard: React.FC<ListingCardProps> = ({
         {location?.region}, {location?.label}
       </div>
 
-      <div className="font-light text-neutral-500">
+      <div className="font-light text-neutral-500 text-sm my-2">
         {reservationDate || data.category}
       </div>
 
       <div className="flex items-center gap-1">
-        <div className="font-semibold">${price}</div>
+        <div className="font-semibold">$ {price}</div>
 
         {!reservation && <div className="font-light">night</div>}
       </div>
